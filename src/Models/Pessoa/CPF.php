@@ -18,6 +18,7 @@ class CPF
 
     public function retornaCPF(): string
     {
+        echo 'a';
         return $this->CPF;
     }
 
