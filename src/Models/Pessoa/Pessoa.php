@@ -1,8 +1,8 @@
 <?php
 
-namespace Models\Pessoa;
+namespace Nathan\Banco\Models\Pessoa;
 
-use Models\Pessoa\CPF;
+use Nathan\Banco\Models\CPF;
 
 class Pessoa
 {
@@ -29,7 +29,8 @@ class Pessoa
         return $this->CPF->retornaCPF();
     }
 
-    private function validaNome(string $nome): bool {
+    final private function validaNome(string $nome): bool
+    {
         return preg_match('/\s/', $nome);
     }
 }

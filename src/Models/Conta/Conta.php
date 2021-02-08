@@ -1,17 +1,17 @@
 <?php
 
-namespace Models;
+namespace Nathan\Banco\Models\Conta;
 
-use Models\Pessoa\Pessoa;
+use Nathan\Banco\Models\Conta\Titular;
 
-class Conta
+abstract class Conta
 {
-    private $saldo;
+    protected $saldo;
     private static $numeroContas;
 
-    public function __construct(Pessoa $pessoa)
+    public function __construct(Titular $titular)
     {
-        $this->titular = $pessoa;
+        $this->titular = $titular;
         $this->saldo = 0;
 
         self::$numeroContas++;
@@ -37,28 +37,13 @@ class Conta
         return $this->saldo;
     }
 
-    public function sacar(float $valorSaque): bool
-    {
-        if ($this->saldo < $valorSaque) return false;
-
-        $this->saldo -= $valorSaque;
-        return true;
-    }
+    abstract protected function sacar(float $valorSaque): bool;
 
     public function depositar(float $valorDeposito): bool
     {
         if ($valorDeposito <= 0) return false;
 
         $this->saldo += $valorDeposito;
-        return true;
-    }
-
-    public function transferir(float $valorTransferencia, Conta $conta): bool
-    {
-        if ($valorTransferencia <= 0) return false;
-
-        $this->sacar($valorTransferencia);
-        $conta->depositar($valorTransferencia);
         return true;
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Models\Pessoa;
+namespace Nathan\Banco\Models;
 
-class CPF
+final class CPF
 {
     private $CPF;
 

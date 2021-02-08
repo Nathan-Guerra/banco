@@ -1,17 +1,39 @@
 <?php
 
-namespace Models;
+namespace Nathan\Banco\Models;
 
-class Endereco
+final class Endereco
 {
+    private $cidade;
+    private $bairro;
     private $endereco;
     private $numero;
-    private $cidade;
 
-    public function __construct(string $endereco, string $numero, string $cidade)
+    public function __construct(string $cidade, string $endereco, string $numero, string $bairro)
     {
+        $this->cidade = $cidade;
+        $this->bairro = $bairro;
         $this->endereco = $endereco;
         $this->numero = $numero;
-        $this->cidade = $cidade;
+    }
+
+    public function recuperaCidade(): string
+    {
+        return $this->cidade;
+    }
+
+    public function recuperaBairro(): string
+    {
+        return $this->bairro;
+    }
+
+    public function recuperaEndereco(): string
+    {
+        return $this->endereco;
+    }
+
+    public function recuperaNumero(): string
+    {
+        return $this->numero;
     }
 }
