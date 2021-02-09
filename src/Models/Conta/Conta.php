@@ -41,7 +41,9 @@ abstract class Conta
 
     public function depositar(float $valorDeposito): bool
     {
-        if ($valorDeposito <= 0) return false;
+        if ($valorDeposito <= 0) {
+            throw new \InvalidArgumentException();
+        }
 
         $this->saldo += $valorDeposito;
         return true;

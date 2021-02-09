@@ -1,8 +1,9 @@
 <?php
 
-namespace Nathan\Banco\Models\Pessoa;
+namespace Nathan\Banco\Models;
 
 use Nathan\Banco\Models\CPF;
+use Nathan\Banco\Models\NomeInvalidoException;
 
 class Pessoa
 {
@@ -11,9 +12,10 @@ class Pessoa
 
     public function __construct(string $nome, CPF $CPF)
     {
-        if ($this->validaNome($nome) === false) {
-            die('Sobrenome necessario');
-            return;
+        try {
+            $this->validaNome($nome);
+        } catch (NomeInvalidoException $e) {
+            die ('Precisa informar um sobrenome.');
         }
         $this->nome = $nome;
         $this->CPF = $CPF;
@@ -31,6 +33,9 @@ class Pessoa
 
     final private function validaNome(string $nome): bool
     {
-        return preg_match('/\s/', $nome);
+        if (preg_match('/\s/', $nome) == false) {
+            throw new NomeInvalidoException();
+        }
+        return true;
     }
 }

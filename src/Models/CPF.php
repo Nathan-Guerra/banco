@@ -8,9 +8,10 @@ final class CPF
 
     public function __construct(string $CPF)
     {
-        if ($this->validaCPF($CPF) === false) {
-            die('CPF Invalido' . PHP_EOL);
-            return;
+        try {
+            $this->validaCPF($CPF);
+        } catch (\InvalidArgumentException $e) {
+            die($e->getMessage());
         }
 
         $this->CPF = $CPF;
@@ -27,10 +28,14 @@ final class CPF
         $numerosCPF = str_replace(['.', '-'], '', $CPF);
 
         // numero de digitos incorreto
-        if (strlen($numerosCPF) !== 11) return false;
+        if (strlen($numerosCPF) !== 11) {
+            throw new \InvalidArgumentException('Tamanho do CPF incorreto.');
+        }
 
         // contem apenas um digito distinto
-        if (count(array_count_values(str_split($numerosCPF))) == 1) return false;
+        if (count(array_count_values(str_split($numerosCPF))) == 1) {
+            throw new \InvalidArgumentException('CPF inválido.');
+        }
 
         $numerosCPF = str_split($numerosCPF);
         $soma = 0;
@@ -48,7 +53,7 @@ final class CPF
         $segundoDigito = (($soma * 10) % 11  == 10) ? 0 : ($soma * 10) % 11;
 
         if ($primeiroDigito != $numerosCPF[9] || $segundoDigito != $numerosCPF[10]) {
-            return false;
+            throw new \InvalidArgumentException('Dígitos de validação incorretos');
         }
 
         return true;

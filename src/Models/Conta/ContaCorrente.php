@@ -32,7 +32,9 @@ class ContaCorrente extends Conta
         $tarifaSaque = $valorSaque * $this->percentualTarifa();
         $valorASacar = $valorSaque + $tarifaSaque;
 
-        if ($this->saldo < $valorASacar) return false;
+        if ($this->saldo < $valorASacar) {
+            throw new SaldoInsuficienteException($valorASacar, $this->saldo);
+        };
 
         $this->saldo -= $valorASacar;
 

@@ -2,7 +2,7 @@
 
 namespace Nathan\Banco\Models\Funcionario;
 
-use Nathan\Banco\Models\Pessoa\Pessoa;
+use Nathan\Banco\Models\Pessoa;
 use Nathan\Banco\Models\CPF;
 
 abstract class Funcionario extends Pessoa

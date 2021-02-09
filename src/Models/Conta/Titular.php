@@ -2,7 +2,7 @@
 
 namespace Nathan\Banco\Models\Conta;
 
-use Nathan\Banco\Models\Pessoa\Pessoa;
+use Nathan\Banco\Models\Pessoa;
 use Nathan\Banco\Models\Endereco;
 use Nathan\Banco\Models\CPF;
 
